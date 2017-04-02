@@ -23,7 +23,7 @@ if(isset($_POST['submit'])){
 
     if(empty($data_missing)){
 
-        require_once('../mysqli_connect.php');
+        require_once('../../mysqli_connect.php');
 
 	$query = "SELECT points FROM users WHERE username = ?";
 

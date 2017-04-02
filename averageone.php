@@ -3,7 +3,7 @@
 require_once('../../mysqli_connect.php');
 
 // Create a query for the database
-$query = "SELECT *  FROM users";
+$query = "SELECT capacity, AVG(rate) FROM roomtypes GROUP BY capacity HAVING capacity=1";
 
 // Get a response from the database by sending the connection
 // and the query
@@ -12,18 +12,19 @@ $response = @mysqli_query($dbc, $query);
 // If the query executed properly proceed
 if($response){
 
-  echo '<table>
+  echo '<table align="centre"
+  cellspacing="5" cellpadding="8">
 
-  <tr><td><b>Username</b></td>
-  <td ><b>Points</b></td></tr>';
+  <tr><td align="centre"><b>Capacity</b></td>
+  <td align="centre"><b>Average rate</b></td></tr>';
 
   // mysqli_fetch_array will return a row of data from the query
   // until no further data is available
   while($row = mysqli_fetch_array($response)){
 
-    echo '<tr><td align="left">' .
-    $row['username'] . '</td><td align="centre">' .
-    $row['points'] . '</td>';
+    echo '<tr><td align="centre">' .
+    $row['capacity'] . '</td><td align="centre">' .
+    $row['AVG(rate)'] . '</td>';
 
     echo '</tr>';
   }

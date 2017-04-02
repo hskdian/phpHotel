@@ -35,7 +35,7 @@
 
     if(empty($data_missing)){
 
-      require_once('../mysqli_connect.php');
+      require_once('../../mysqli_connect.php');
 
       $query = "INSERT INTO students (first_name, last_name) VALUES (?, ?)";
 

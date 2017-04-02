@@ -2,9 +2,26 @@
 // Get a connection for the database
 require_once('../../mysqli_connect.php');
 
-// Create a query for the database
-$query = "SELECT *  FROM users";
+//see if username exists
 
+    // Do whatever you want with the $uid
+// Create a query for the database
+if (isset($_POST["username2"]))
+{
+  $username2 = $_POST["username2"];
+  echo $username2;
+  echo " is your username";
+}
+else
+{
+  $user = null;
+  echo "no username supplied";
+}
+// var_dump($_POST);
+// $username2 =$_SERVER['QUERY_STRING'];
+
+    // $username2 = $_POST['username2'];
+    $query = "SELECT * FROM users WHERE username = '$username2'";
 // Get a response from the database by sending the connection
 // and the query
 $response = @mysqli_query($dbc, $query);
