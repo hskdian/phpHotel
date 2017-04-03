@@ -47,14 +47,10 @@
           <div class="panel-heading clearfix">
             <h3 class="panel-title pull-left">Find User</h3>
             <div class="btn-group pull-right">
-              <button class="btn btn-danger">
-                <i class="fa fa-times"></i>
-                Cancel
-              </button>
-              <button class="btn btn-success">
-                <i class="fa fa-check"></i>
-                Find
-              </button>
+              <button class="btn btn-primary" id = "allcustomers"><i class="fa fa-list"></i>All Customers</button>
+              <button class="btn btn-info" id = "allusers"><i class="fa fa-list-alt"></i>All Users</button>
+              <button class="btn btn-danger"><i class="fa fa-times"></i>Cancel</button>
+              <button class="btn btn-success" id = "findcustomer"><i class="fa fa-check"></i>Find User</button>
             </div>
           </div>
           <div class="modal-body">
@@ -64,25 +60,25 @@
                 <label class="col-xs-3 control-label">Show in Table</label>
                 <div class="col-xs-9">
                   <label class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input">
+                    <input type="checkbox" class="custom-control-input" value = "creditCardNo" id = "projectCreditCard">
                     <span class="custom-control-indicator"></span>
                     <span class="custom-control-description">Show Credit Card</span>
                   </label>
 
                   <label class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input">
+                    <input type="checkbox" class="custom-control-input" value = "guestID" id = "projectGuestID">
                     <span class="custom-control-indicator"></span>
                     <span class="custom-control-description">Show GuestID</span>
                   </label>
 
                   <label class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input">
+                    <input type="checkbox" class="custom-control-input" value = "username" id = "projectUsername">
                     <span class="custom-control-indicator"></span>
                     <span class="custom-control-description">Show Username</span>
                   </label>
 
                   <label class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input">
+                    <input type="checkbox" class="custom-control-input" value = "name" id = "projectName">
                     <span class="custom-control-indicator"></span>
                     <span class="custom-control-description">Show Name</span>
                   </label>
@@ -92,41 +88,42 @@
               <div class="form-group">
                 <label class="col-xs-3 control-label">Credit Card Numner</label>
                 <div class="col-xs-9">
-                  <input type="text" class="form-control" value="John Smith">
+                  <input type="text" class="form-control" placeholder="1111" id = "filterCreditCard">
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="col-xs-3 control-label">GuestID</label>
                 <div class="col-xs-9">
-                  <select class="form-control">
+                  <input type="text" class="form-control" placeholder="1" id = "filterGuestID">
+                  <!-- <select class="form-control">
                     <option>Designer</option>
                     <option selected>Developer</option>
                     <option>Salesman</option>
-                  </select>
+                  </select> -->
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="col-xs-3 control-label">Username</label>
                 <div class="col-xs-9">
-                  <input type="text" class="form-control" value="John Smith">
+                  <input type="text" class="form-control" placeholder="a" id ="filterUsername">
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="col-xs-3 control-label">Show Name</label>
+                <label class="col-xs-3 control-label">Name</label>
                 <div class="col-xs-9">
-                  <input type="text" class="form-control" value="John Smith">
+                  <input type="text" class="form-control" placeholder="Jim" id = "filterName">
                 </div>
               </div>
 
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <label class="col-xs-3 control-label">Show Points (Only avaiable for showing all Users)</label>
                 <div class="col-xs-9">
-                  <input type="text" class="form-control" value="John Smith">
+                  <input type="text" class="form-control" placeholder="3">
                 </div>
-              </div>
+              </div> -->
 
             </form>
           </div>
@@ -141,6 +138,65 @@
     <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootcards/1.0.0/js/bootcards.min.js"></script>
-    <script type="text/javascript" src ="manager.js"></script>
+    <script type="text/javascript">
+    $("#allcustomers").click(function() {
+
+      $.ajax({    //create an ajax request to load_page.php
+        type: "GET",
+        url: "allcustomers.php",
+        dataType: "html",   //expect html to be returned
+        success: function(response){
+          $("#responsecontainer").html(response);
+          //alert(response);
+        }
+
+      });
+    });
+
+    $("#allusers").click(function() {
+
+      $.ajax({    //create an ajax request to load_page.php
+        type: "GET",
+        url: "allusers.php",
+        dataType: "html",   //expect html to be returned
+        success: function(response){
+          $("#responsecontainer").html(response);
+          //alert(response);
+        }
+
+      });
+    });
+
+    $("#findcustomer").click(function() {
+      var queryData = new Object();
+      if (document.getElementById("projectCreditCard").checked)
+        queryData.projectCreditCard = "creditCardNo";
+      if (document.getElementById("projectGuestID").checked)
+        queryData.projectGuestID = "guestID";
+      if (document.getElementById("projectUsername").checked)
+        queryData.projectUsername = "username"
+      if (document.getElementById("projectName").checked)
+        queryData.projectName = "name";
+      if ($("#filterCreditCard").val() != "")
+          queryData.filterCreditCard = $("#filterCreditCard").val();
+      if ($("#filterGuestID").val() != "")
+          queryData.filterGuestID = $("#filterGuestID").val();
+      if ($("#filterUsername").val() != "")
+          queryData.filterUsername = $("#filterUsername").val();
+      if ($("#filterName").val() != "")
+          queryData.filterName = $("#filterName").val() ;
+        console.log(queryData);
+
+        $.ajax({    //create an ajax request to load_page.php
+          type: "POST",
+          data: queryData,
+          url: "fincustomer.php",
+          dataType: "html",   //expect html to be returned
+          success: function(response){
+            $("#responsecontainer").html(response);
+          }
+        });
+    });
+    </script>
   </body>
   </html>
