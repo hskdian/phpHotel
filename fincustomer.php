@@ -48,6 +48,8 @@ if (isset($_POST["projectName"]))
   $query .= " ,$projectName";
 }
 
+//if none of the projection field is chosen, select *
+
 $query .= " FROM customers";
 
 $addAND = 0;

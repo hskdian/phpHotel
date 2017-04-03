@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>BookingPals</title>
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootcards/1.0.0/css/bootcards-desktop.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootcards/1.0.0/css/bootcards-desktop.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="styles.css">
   <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
@@ -27,7 +27,7 @@
         <ul class="nav navbar-nav">
           <li><a href="manager.php">Manager View</a></li>
           <li class = "active"><a href="manageruser.php">Manage Users</a></li>
-          <li><a href="#">Manage Reservations</a></li>
+          <li><a href="managerreservation.php">Manage Reservations</a></li>
 
         </ul>
         <ul class="nav navbar-nav navbar-right">
@@ -53,6 +53,7 @@
               <button class="btn btn-success" id = "findcustomer"><i class="fa fa-check"></i>Find User</button>
             </div>
           </div>
+
           <div class="modal-body">
             <form class="form-horizontal">
 
@@ -97,106 +98,43 @@
                 <div class="col-xs-9">
                   <input type="text" class="form-control" placeholder="1" id = "filterGuestID">
                   <!-- <select class="form-control">
-                    <option>Designer</option>
-                    <option selected>Developer</option>
-                    <option>Salesman</option>
-                  </select> -->
-                </div>
+                  <option>Designer</option>
+                  <option selected>Developer</option>
+                  <option>Salesman</option>
+                </select> -->
               </div>
+            </div>
 
-              <div class="form-group">
-                <label class="col-xs-3 control-label">Username</label>
-                <div class="col-xs-9">
-                  <input type="text" class="form-control" placeholder="a" id ="filterUsername">
-                </div>
+            <div class="form-group">
+              <label class="col-xs-3 control-label">Username</label>
+              <div class="col-xs-9">
+                <input type="text" class="form-control" placeholder="a" id ="filterUsername">
               </div>
+            </div>
 
-              <div class="form-group">
-                <label class="col-xs-3 control-label">Name</label>
-                <div class="col-xs-9">
-                  <input type="text" class="form-control" placeholder="Jim" id = "filterName">
-                </div>
+            <div class="form-group">
+              <label class="col-xs-3 control-label">Name</label>
+              <div class="col-xs-9">
+                <input type="text" class="form-control" placeholder="Jim" id = "filterName">
               </div>
+            </div>
 
-              <!-- <div class="form-group">
-                <label class="col-xs-3 control-label">Show Points (Only avaiable for showing all Users)</label>
-                <div class="col-xs-9">
-                  <input type="text" class="form-control" placeholder="3">
-                </div>
-              </div> -->
-
-            </form>
+            <!-- <div class="form-group">
+            <label class="col-xs-3 control-label">Show Points (Only avaiable for showing all Users)</label>
+            <div class="col-xs-9">
+            <input type="text" class="form-control" placeholder="3">
           </div>
-        </div>
+        </div> -->
 
-        <div style="background:transparent !important" class="jumbotron">
-          <div id="responsecontainer" align="center" color = "grey">
-          </div>
-        </div>
-      </div>
+      </form>
     </div>
-    <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/bootcards/1.0.0/js/bootcards.min.js"></script>
-    <script type="text/javascript">
-    $("#allcustomers").click(function() {
-
-      $.ajax({    //create an ajax request to load_page.php
-        type: "GET",
-        url: "allcustomers.php",
-        dataType: "html",   //expect html to be returned
-        success: function(response){
-          $("#responsecontainer").html(response);
-          //alert(response);
-        }
-
-      });
-    });
-
-    $("#allusers").click(function() {
-
-      $.ajax({    //create an ajax request to load_page.php
-        type: "GET",
-        url: "allusers.php",
-        dataType: "html",   //expect html to be returned
-        success: function(response){
-          $("#responsecontainer").html(response);
-          //alert(response);
-        }
-
-      });
-    });
-
-    $("#findcustomer").click(function() {
-      var queryData = new Object();
-      if (document.getElementById("projectCreditCard").checked)
-        queryData.projectCreditCard = "creditCardNo";
-      if (document.getElementById("projectGuestID").checked)
-        queryData.projectGuestID = "guestID";
-      if (document.getElementById("projectUsername").checked)
-        queryData.projectUsername = "username"
-      if (document.getElementById("projectName").checked)
-        queryData.projectName = "name";
-      if ($("#filterCreditCard").val() != "")
-          queryData.filterCreditCard = $("#filterCreditCard").val();
-      if ($("#filterGuestID").val() != "")
-          queryData.filterGuestID = $("#filterGuestID").val();
-      if ($("#filterUsername").val() != "")
-          queryData.filterUsername = $("#filterUsername").val();
-      if ($("#filterName").val() != "")
-          queryData.filterName = $("#filterName").val() ;
-        console.log(queryData);
-
-        $.ajax({    //create an ajax request to load_page.php
-          type: "POST",
-          data: queryData,
-          url: "fincustomer.php",
-          dataType: "html",   //expect html to be returned
-          success: function(response){
-            $("#responsecontainer").html(response);
-          }
-        });
-    });
-    </script>
-  </body>
-  </html>
+  </div>
+  <div id="responsecontainer" align="center" color = "grey"></div>
+</div>
+</div>
+<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootcards/1.0.0/js/bootcards.min.js"></script>
+<script type="text/javascript" src = "manageruser.js"></script>
+</body>
+</html>
