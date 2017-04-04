@@ -114,24 +114,24 @@
               </div>
             </form>
 
-
             <form class="form-horizontal">
               <div class="form-group form-inline">
                 <label class="col-xs-3 control-label">Find the </label>
                 <div class="col-xs-9">
-                  <select class="form-control">
+                  <select class="form-control" id = "nestedAggregator">
                     <option selected>MAX</option>
                     <option>MIN</option>
-                    <option>COUNT</option>
-                    <option>AVG</option>
-                    <option>SUM</option>
                   </select>
                   <span>Of</span>
-                  <select class="form-control">
+                  <select class="form-control" id = "nestedtobeAggregated">
                     <option selected>amountDue</option>
                     <option>pointsEarned</option>
                   </select>
-                  <span>Averaged By Individual Customer</span>
+                  <span>Average Grouped By</span>
+                  <select class="form-control" id = "nestedAveraged">
+                    <option selected>creditCardNo</option>
+                    <option>roomNo</option>
+                  </select>
                 </div>
               </div>
             </form>
@@ -185,6 +185,23 @@
         type: "POST",
         data: queryData,
         url: "aggregate.php",
+        dataType: "html",   //expect html to be returned
+        success: function(response){
+          $("#responsecontainer").html(response);
+        }
+      });
+    });
+
+    $("#aggregateNested").click(function() {
+      var queryData = new Object();
+      queryData.aggregator = $("#nestedAggregator").val();
+      queryData.tobeAggregated = $("#nestedtobeAggregated").val();
+      queryData.toAverage = $("#nestedAveraged").val();
+      console.log(queryData);
+      $.ajax({    //create an ajax request to load_page.php
+        type: "POST",
+        data: queryData,
+        url: "nestedaggregate.php",
         dataType: "html",   //expect html to be returned
         success: function(response){
           $("#responsecontainer").html(response);
