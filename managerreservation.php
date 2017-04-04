@@ -47,8 +47,9 @@
           <div class="panel-heading clearfix">
             <h3 class="panel-title pull-left">Find User</h3>
             <div class="btn-group pull-right">
-              <button class="btn btn-primary" id = "allreservations"><i class="fa fa-list"></i>All Reservations</button>
+              <!-- <button class="btn btn-primary" id = "allreservations"><i class="fa fa-list"></i>All Reservations</button> -->
               <button class="btn btn-info" id = "joinReservation"><i class="fa fa-compress" aria-hidden="true"></i>Join Tables</button>
+              <button class="btn btn-primary" id = "division"><i class="fa fa-check"></i>Division</button>
               <button class="btn btn-danger" id = "aggregate"><i class="fa fa-times"></i>Aggregate Functions</button>
               <button class="btn btn-success" id = "aggregateNested"><i class="fa fa-check"></i>Aggregate Group by Functions</button>
             </div>
@@ -85,10 +86,8 @@
               <div class="form-group">
                 <label class="col-xs-3 control-label">Customers who</label>
                 <div class="col-xs-9">
-                  <select class="form-control">
-                    <option>Booked All the rooms</option>
+                  <select class="form-control" id = "divideBy">
                     <option selected>Booked All the rooms</option>
-                    <option>Salesman</option>
                   </select>
                 </div>
               </div>
@@ -169,6 +168,21 @@
         type: "POST",
         data: queryData,
         url: "joinReservation.php",
+        dataType: "html",   //expect html to be returned
+        success: function(response){
+          $("#responsecontainer").html(response);
+        }
+      });
+    });
+
+    $("#division").click(function() {
+      var queryData = new Object();
+      queryData.divide = $("#divideBy").val();
+      console.log(queryData);
+      $.ajax({    //create an ajax request to load_page.php
+        type: "POST",
+        data: queryData,
+        url: "division.php",
         dataType: "html",   //expect html to be returned
         success: function(response){
           $("#responsecontainer").html(response);

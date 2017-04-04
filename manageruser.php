@@ -50,7 +50,7 @@
               <button class="btn btn-primary" id = "allcustomers"><i class="fa fa-list"></i>All Customers</button>
               <button class="btn btn-info" id = "allusers"><i class="fa fa-list-alt"></i>All Users</button>
               <button class="btn btn-danger"><i class="fa fa-times"></i>Cancel</button>
-              <button class="btn btn-success" id = "findcustomer"><i class="fa fa-check"></i>Find User</button>
+              <button class="btn btn-success" id = "findcustomer"><i class="fa fa-search" aria-hidden="true"></i>Find User</button>
             </div>
           </div>
 
