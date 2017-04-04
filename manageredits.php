@@ -27,8 +27,8 @@
         <ul class="nav navbar-nav">
           <li><a href="manager.php">Manager View</a></li>
           <li><a href="manageruser.php">Manage Users</a></li>
-          <li class = "active"><a href="managerreservation.php">Manage Reservations</a></li>
-          <li><a href="manageredits.php">Manage Changes</a></li>
+          <li><a href="managerreservation.php">Manage Reservations</a></li>
+          <li class = "active"><a href="manageredits.php">Manage Changes</a></li>
 
         </ul>
         <ul class="nav navbar-nav navbar-right">
@@ -49,36 +49,20 @@
             <h3 class="panel-title pull-left">Find User</h3>
             <div class="btn-group pull-right">
               <!-- <button class="btn btn-primary" id = "allreservations"><i class="fa fa-list"></i>All Reservations</button> -->
-              <button class="btn btn-info" id = "joinReservation"><i class="fa fa-compress" aria-hidden="true"></i>Join Tables</button>
-              <button class="btn btn-primary" id = "division"><i class="fa fa-check"></i>Division</button>
-              <button class="btn btn-danger" id = "aggregate"><i class="fa fa-times"></i>Aggregate Functions</button>
-              <button class="btn btn-success" id = "aggregateNested"><i class="fa fa-check"></i>Aggregate Group by Functions</button>
+              <button class="btn btn-info" id = "deleteReservations"><i class="fa fa-compress" aria-hidden="true"></i>Delete Reservations</button>
+              <button class="btn btn-primary" id = "deleteBill"><i class="fa fa-check"></i>Delete Bills</button>
+              <button class="btn btn-danger" id = "aggregate"><i class="fa fa-times"></i>Upgrade Room</button>
+              <button class="btn btn-success" id = "aggregateNested"><i class="fa fa-check"></i>Update Confirmation Number</button>
             </div>
           </div>
 
           <div class="modal-body">
+
             <form class="form-horizontal">
-
-              <div class="form-group">
-                <label class="col-xs-3 control-label">Include in Reservations</label>
+              <div class="form-group form-inline">
+                <label class="col-xs-3 control-label">Delete Reservations </label>
                 <div class="col-xs-9">
-                  <label class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" value = "confirmationNo" id = "includeBill">
-                    <span class="custom-control-indicator"></span>
-                    <span class="custom-control-description">Bills</span>
-                  </label>
-
-                  <label class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" varlue = "roomNo" id = "includeRoom">
-                    <span class="custom-control-indicator"></span>
-                    <span class="custom-control-description">Room Info</span>
-                  </label>
-
-                  <label class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" value = "creditCardNo" id = "includeCustomer">
-                    <span class="custom-control-indicator"></span>
-                    <span class="custom-control-description">Customer Details</span>
-                  </label>
+                  <input type="number" class="form-control" placeholder="1" id = "deleteReservationID">
                 </div>
               </div>
             </form>
@@ -96,45 +80,28 @@
 
             <form class="form-horizontal">
               <div class="form-group form-inline">
-                <label class="col-xs-3 control-label">Find the </label>
+                <label class="col-xs-3 control-label">Update UserID </label>
                 <div class="col-xs-9">
-                  <select class="form-control" id = "singleAggregator">
-                    <option>MAX</option>
-                    <option selected>MIN</option>
-                    <option>COUNT</option>
-                    <option>AVG</option>
-                    <option>SUM</option>
-                  </select>
-                  <span>Of</span>
-                  <select class="form-control" id = "singletobeAggregated">
-                    <option selected>amountDue</option>
-                    <option>pointsEarned</option>
-                  </select>
+                  <span>From</span>
+                  <input type="number" class="form-control" placeholder="1111" id = "olduserID">
+                  <span>TO</span>
+                  <input type="number" class="form-control" placeholder="2222" id = "newuserID">
                 </div>
               </div>
             </form>
 
             <form class="form-horizontal">
               <div class="form-group form-inline">
-                <label class="col-xs-3 control-label">Find the </label>
+                <label class="col-xs-3 control-label">Update GuestID </label>
                 <div class="col-xs-9">
-                  <select class="form-control" id = "nestedAggregator">
-                    <option selected>MAX</option>
-                    <option>MIN</option>
-                  </select>
-                  <span>Of</span>
-                  <select class="form-control" id = "nestedtobeAggregated">
-                    <option selected>amountDue</option>
-                    <option>pointsEarned</option>
-                  </select>
-                  <span>Average Grouped By</span>
-                  <select class="form-control" id = "nestedAveraged">
-                    <option selected>creditCardNo</option>
-                    <option>roomNo</option>
-                  </select>
+                  <span>From</span>
+                  <input type="number" class="form-control" placeholder="1111" id = "oldguestID">
+                  <span>TO</span>
+                  <input type="number" class="form-control" placeholder="2222" id = "newguestID">
                 </div>
               </div>
             </form>
+
           </div>
         </div>
         <div id="responsecontainer" align="center" color = "grey"></div>
@@ -144,31 +111,15 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootcards/1.0.0/js/bootcards.min.js"></script>
     <script type="text/javascript">
-    $("#allreservations").click(function() {
-      $.ajax({    //create an ajax request to load_page.php
-        type: "GET",
-        url: "allreservations.php",
-        dataType: "html",   //expect html to be returned
-        success: function(response){
-          $("#responsecontainer").html(response);
-          //alert(response);
-        }
-      });
-    });
 
-    $("#joinReservation").click(function() {
+    $("#deleteReservations").click(function() {
       var queryData = new Object();
-      if (document.getElementById("includeBill").checked)
-      queryData.bill = "confirmationNo";
-      if (document.getElementById("includeRoom").checked)
-      queryData.room = "roomNo"
-      if (document.getElementById("includeCustomer").checked)
-      queryData.customer = "creditCardNo";
+      queryData.reservationID = $("#deleteReservationID").val();
       console.log(queryData);
       $.ajax({    //create an ajax request to load_page.php
         type: "POST",
         data: queryData,
-        url: "joinReservation.php",
+        url: "deleteReservation.php",
         dataType: "html",   //expect html to be returned
         success: function(response){
           $("#responsecontainer").html(response);
