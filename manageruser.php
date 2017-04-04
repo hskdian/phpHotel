@@ -89,19 +89,14 @@
               <div class="form-group">
                 <label class="col-xs-3 control-label">Credit Card Numner</label>
                 <div class="col-xs-9">
-                  <input type="text" class="form-control" placeholder="1111" id = "filterCreditCard">
+                  <input type="number" class="form-control" placeholder="1111" id = "filterCreditCard">
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="col-xs-3 control-label">GuestID</label>
                 <div class="col-xs-9">
-                  <input type="text" class="form-control" placeholder="1" id = "filterGuestID">
-                  <!-- <select class="form-control">
-                  <option>Designer</option>
-                  <option selected>Developer</option>
-                  <option>Salesman</option>
-                </select> -->
+                  <input type="number" class="form-control" placeholder="1" id = "filterGuestID">
               </div>
             </div>
 

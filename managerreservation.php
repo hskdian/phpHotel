@@ -48,9 +48,9 @@
             <h3 class="panel-title pull-left">Find User</h3>
             <div class="btn-group pull-right">
               <button class="btn btn-primary" id = "allreservations"><i class="fa fa-list"></i>All Reservations</button>
-              <button class="btn btn-info" id = "joinReservation">Join Tables</button>
-              <button class="btn btn-danger"><i class="fa fa-times"></i>Cancel</button>
-              <button class="btn btn-success" id = "findcustomer"><i class="fa fa-check"></i>Find User</button>
+              <button class="btn btn-info" id = "joinReservation"><i class="fa fa-compress" aria-hidden="true"></i>Join Tables</button>
+              <button class="btn btn-danger" id = "aggregate"><i class="fa fa-times"></i>Aggregate Functions</button>
+              <button class="btn btn-success" id = "aggregateNested"><i class="fa fa-check"></i>Aggregate Group by Functions</button>
             </div>
           </div>
 
@@ -77,6 +77,61 @@
                     <span class="custom-control-indicator"></span>
                     <span class="custom-control-description">Customer Details</span>
                   </label>
+                </div>
+              </div>
+            </form>
+
+            <form class="form-horizontal">
+              <div class="form-group">
+                <label class="col-xs-3 control-label">Customers who</label>
+                <div class="col-xs-9">
+                  <select class="form-control">
+                    <option>Booked All the rooms</option>
+                    <option selected>Booked All the rooms</option>
+                    <option>Salesman</option>
+                  </select>
+                </div>
+              </div>
+            </form>
+
+            <form class="form-horizontal">
+              <div class="form-group form-inline">
+                <label class="col-xs-3 control-label">Find the </label>
+                <div class="col-xs-9">
+                  <select class="form-control" id = "singleAggregator">
+                    <option>MAX</option>
+                    <option selected>MIN</option>
+                    <option>COUNT</option>
+                    <option>AVG</option>
+                    <option>SUM</option>
+                  </select>
+                  <span>Of</span>
+                  <select class="form-control" id = "singletobeAggregated">
+                    <option selected>amountDue</option>
+                    <option>pointsEarned</option>
+                  </select>
+                </div>
+              </div>
+            </form>
+
+
+            <form class="form-horizontal">
+              <div class="form-group form-inline">
+                <label class="col-xs-3 control-label">Find the </label>
+                <div class="col-xs-9">
+                  <select class="form-control">
+                    <option selected>MAX</option>
+                    <option>MIN</option>
+                    <option>COUNT</option>
+                    <option>AVG</option>
+                    <option>SUM</option>
+                  </select>
+                  <span>Of</span>
+                  <select class="form-control">
+                    <option selected>amountDue</option>
+                    <option>pointsEarned</option>
+                  </select>
+                  <span>Averaged By Individual Customer</span>
                 </div>
               </div>
             </form>
@@ -110,11 +165,26 @@
       if (document.getElementById("includeCustomer").checked)
       queryData.customer = "creditCardNo";
       console.log(queryData);
-
       $.ajax({    //create an ajax request to load_page.php
         type: "POST",
         data: queryData,
         url: "joinReservation.php",
+        dataType: "html",   //expect html to be returned
+        success: function(response){
+          $("#responsecontainer").html(response);
+        }
+      });
+    });
+
+    $("#aggregate").click(function() {
+      var queryData = new Object();
+      queryData.aggregator = $("#singleAggregator").val();
+      queryData.singletobeAggregated = $("#singletobeAggregated").val();
+      console.log(queryData);
+      $.ajax({    //create an ajax request to load_page.php
+        type: "POST",
+        data: queryData,
+        url: "aggregate.php",
         dataType: "html",   //expect html to be returned
         success: function(response){
           $("#responsecontainer").html(response);
