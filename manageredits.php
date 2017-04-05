@@ -25,10 +25,10 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
         <ul class="nav navbar-nav">
-          <li><a href="manager.php">Manager View</a></li>
           <li><a href="manageruser.php">Manage Users</a></li>
           <li><a href="managerreservation.php">Manage Reservations</a></li>
           <li class = "active"><a href="manageredits.php">Manage Changes</a></li>
+          <li><a href="managerVisualize.php">Visualization</a></li>
 
         </ul>
         <ul class="nav navbar-nav navbar-right">
@@ -156,22 +156,6 @@
         });
     });
 
-    $("#aggregateNested").click(function() {
-      var queryData = new Object();
-      queryData.aggregator = $("#nestedAggregator").val();
-      queryData.tobeAggregated = $("#nestedtobeAggregated").val();
-      queryData.toAverage = $("#nestedAveraged").val();
-      console.log(queryData);
-      $.ajax({    //create an ajax request to load_page.php
-        type: "POST",
-        data: queryData,
-        url: "nestedaggregate.php",
-        dataType: "html",   //expect html to be returned
-        success: function(response){
-          $("#responsecontainer").html(response);
-        }
-      });
-    });
     </script>
   </body>
   </html>

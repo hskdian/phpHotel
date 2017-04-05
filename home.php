@@ -32,7 +32,7 @@
         <ul class="nav navbar-nav navbar-right">
           <li><a href="#">Signup <i class="fa fa-user-plus" aria-hidden="true"></i></a></li>
           <li><a href="#">Login <i class="fa fa-user" aria-hidden="true"></i></a></li>
-          <li><a href="manager.php">Manager <i class="fa fa-user-secret" aria-hidden="true"></i></a></li>
+          <li><a href="manageruser.php">Manager <i class="fa fa-user-secret" aria-hidden="true"></i></a></li>
         </div>
       </div>
     </ul>

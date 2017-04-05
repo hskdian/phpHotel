@@ -25,11 +25,10 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
         <ul class="nav navbar-nav">
-          <li><a href="manager.php">Manager View</a></li>
           <li class = "active"><a href="manageruser.php">Manage Users</a></li>
           <li><a href="managerreservation.php">Manage Reservations</a></li>
           <li><a href="manageredits.php">Manage Changes</a></li>
-
+          <li><a href="managerVisualize.php">Visualization</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li><a href="#">Signup <i class="fa fa-user-plus" aria-hidden="true"></i></a></li>
