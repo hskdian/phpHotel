@@ -70,8 +70,7 @@ if($upgradeRoom <=10){
 else{
   echo '<div class="panel panel-default">
   <div class="panel-heading clearfix">
-    <h3 class="panel-title pull-left">ERROR</h3>
-      <a class="btn btn-default pull-right" href="#">
+    <h3 class="panel-title pull-left">Error</h3>
   </div>
   <div class="panel-body">';
   echo "No such room exists.";
