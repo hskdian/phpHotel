@@ -24,15 +24,16 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
         <ul class="nav navbar-nav">
-          <li class = "active"><a href="home.php">Home</a></li>
-          <li><a href="#">Cancelling (Under Construction)</a></li>
-          <li><a href="#">Extending (Under Construction)</a></li>
+          <li><a href="manageruser.php">Manage Users</a></li>
+          <li><a href="managerreservation.php">Manage Reservations</a></li>
+          <li class = "active"><a href="manageredits.php">Manage Changes</a></li>
+          <li><a href="managerVisualize.php">Visualization</a></li>
 
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li><a href="#">Signup <i class="fa fa-user-plus" aria-hidden="true"></i></a></li>
           <li><a href="#">Login <i class="fa fa-user" aria-hidden="true"></i></a></li>
-          <li><a href="manageruser.php">Manager <i class="fa fa-user-secret" aria-hidden="true"></i></a></li>
+          <li><a href="#">Manager <i class="fa fa-user-secret" aria-hidden="true"></i></a></li>
         </div>
       </div>
     </ul>
