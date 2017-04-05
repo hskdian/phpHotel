@@ -19,16 +19,16 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a href="home.php" class="navbar-brand">BookingPals</a>
+        <a href="home.html" class="navbar-brand">BookingPals</a>
 
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
         <ul class="nav navbar-nav">
-          <li><a href="manageruser.php">Manage Users</a></li>
-          <li class = "active"><a href="managerreservation.php">Manage Reservations</a></li>
-          <li><a href="manageredits.php">Manage Changes</a></li>
-          <li><a href="managerVisualize.php">Visualization</a></li>
+          <li><a href="manageruser.html">Manage Users</a></li>
+          <li class = "active"><a href="managerreservation.html">Manage Reservations</a></li>
+          <li><a href="manageredits.html">Manage Changes</a></li>
+          <li><a href="managerVisualize.html">Visualization</a></li>
 
         </ul>
         <ul class="nav navbar-nav navbar-right">
@@ -143,86 +143,6 @@
     <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootcards/1.0.0/js/bootcards.min.js"></script>
-    <script type="text/javascript">
-    $("#allreservations").click(function() {
-      $.ajax({    //create an ajax request to load_page.php
-        type: "GET",
-        url: "allreservations.php",
-        dataType: "html",   //expect html to be returned
-        success: function(response){
-          $("#responsecontainer").html(response);
-          //alert(response);
-        }
-      });
-    });
-
-    $("#joinReservation").click(function() {
-      var queryData = new Object();
-      if (document.getElementById("includeBill").checked)
-      queryData.bill = "confirmationNo";
-      if (document.getElementById("includeRoom").checked)
-      queryData.room = "roomNo"
-      if (document.getElementById("includeCustomer").checked)
-      queryData.customer = "creditCardNo";
-      console.log(queryData);
-      $.ajax({    //create an ajax request to load_page.php
-        type: "POST",
-        data: queryData,
-        url: "joinReservation.php",
-        dataType: "html",   //expect html to be returned
-        success: function(response){
-          $("#responsecontainer").html(response);
-        }
-      });
-    });
-
-    $("#division").click(function() {
-      var queryData = new Object();
-      queryData.divide = $("#divideBy").val();
-      console.log(queryData);
-      $.ajax({    //create an ajax request to load_page.php
-        type: "POST",
-        data: queryData,
-        url: "division.php",
-        dataType: "html",   //expect html to be returned
-        success: function(response){
-          $("#responsecontainer").html(response);
-        }
-      });
-    });
-
-    $("#aggregate").click(function() {
-      var queryData = new Object();
-      queryData.aggregator = $("#singleAggregator").val();
-      queryData.singletobeAggregated = $("#singletobeAggregated").val();
-      console.log(queryData);
-      $.ajax({    //create an ajax request to load_page.php
-        type: "POST",
-        data: queryData,
-        url: "aggregate.php",
-        dataType: "html",   //expect html to be returned
-        success: function(response){
-          $("#responsecontainer").html(response);
-        }
-      });
-    });
-
-    $("#aggregateNested").click(function() {
-      var queryData = new Object();
-      queryData.aggregator = $("#nestedAggregator").val();
-      queryData.tobeAggregated = $("#nestedtobeAggregated").val();
-      queryData.toAverage = $("#nestedAveraged").val();
-      console.log(queryData);
-      $.ajax({    //create an ajax request to load_page.php
-        type: "POST",
-        data: queryData,
-        url: "nestedaggregate.php",
-        dataType: "html",   //expect html to be returned
-        success: function(response){
-          $("#responsecontainer").html(response);
-        }
-      });
-    });
-    </script>
+    <script type="text/javascript" src = "managerreservation.js"></script>
   </body>
   </html>
