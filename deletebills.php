@@ -6,7 +6,7 @@ $reservationID = $_POST["reservationID"];
 // Create a query for the database
 $query = "DELETE FROM bills WHERE confirmationNo =  '$reservationID'";
 
-echo $query;
+//echo $query;
 $response = @mysqli_query($dbc, $query);
 
 // If the query executed properly proceed

@@ -10,7 +10,7 @@ $upgradeRoom = $_POST["upgradeRoom"];
 if($upgradeRoom <=10){
   $query = "UPDATE reservations SET roomNo = $upgradeRoom WHERE confirmationNo =$upgradeReservation";
 
-  echo $query;
+  //echo $query;
 
   // Get a response from the database by sending the connection
   // and the query

@@ -98,7 +98,7 @@ if (isset($_POST["filterName"]))
 $query .= ";";
 
 
-echo $query;
+//echo $query;
 
 $response = @mysqli_query($dbc, $query);
 

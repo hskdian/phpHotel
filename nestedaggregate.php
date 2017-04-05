@@ -23,7 +23,7 @@ $query .= $aggregator . "(" . $tobeAggregated . ")" . " FROM bills WHERE $tobeAg
 
 // "SELECT MAX(amountDue) FROM bills WHERE amountDue IN (SELECT AVG(amountDue) AS amountDue FROM reservations INNER JOIN bills ON reservations.confirmationNo = bills.confirmationNo INNER JOIN rooms ON reservations.roomNo = rooms.roomNo INNER JOIN customers ON reservations.creditCardNo = customers.creditCardNo GROUP BY reservations.roomNo)";
 
-echo $query;
+//echo $query;
 // Get a response from the database by sending the connection
 // and the query
 $response = @mysqli_query($dbc, $query);

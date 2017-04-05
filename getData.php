@@ -3,7 +3,7 @@
 require_once('../../mysqli_connect.php');
 
 //fetch table rows from mysql db
-$sql = "SELECT customers.name AS label, AVG(amountDue) as Y FROM bills INNER JOIN reservations ON reservations.confirmationNo = bills.confirmationNo INNER JOIN rooms ON reservations.roomNo = rooms.roomNo INNER JOIN customers ON reservations.creditCardNo = customers.creditCardNo GROUP BY customers.name;";
+$sql = "SELECT customers.name AS label, AVG(amountDue) as y FROM bills INNER JOIN reservations ON reservations.confirmationNo = bills.confirmationNo INNER JOIN rooms ON reservations.roomNo = rooms.roomNo INNER JOIN customers ON reservations.creditCardNo = customers.creditCardNo GROUP BY customers.name;";
 
 $result = mysqli_query($dbc, $sql) or die("Error in Selecting " . mysqli_error($connection));
 

@@ -23,7 +23,7 @@ if (isset($_POST["customer"]))
 
 $query .= ";";
 
-echo $query;
+//echo $query;
 
 $response = @mysqli_query($dbc, $query);
 

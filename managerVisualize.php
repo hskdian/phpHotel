@@ -8,32 +8,7 @@
   <link rel="stylesheet" type="text/css" href="styles.css">
   <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
   <script src="https://use.fontawesome.com/fbc1a80091.js"></script>
-  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script type="text/javascript">
-
-    // Load the Visualization API.
-    google.load('visualization', '1', {'packages':['corechart']});
-
-    // Set a callback to run when the Google Visualization API is loaded.
-    // google.setOnLoadCallback(drawChart);
-
-    function drawChart() {
-      var jsonData = $.ajax({
-          url: "getData.php",
-          dataType:"json",
-          async: false
-          }).responseText;
-
-      // Create our data table out of JSON data loaded from server.
-      var data = new google.visualization.DataTable(jsonData);
-
-      // Instantiate and draw our chart, passing in some options.
-      var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
-      chart.draw(data, {width: 800, height: 400});
-    }
-
-    </script>
+  <script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </head>
 <body>
   <nav class="navbar navbar-default">
@@ -79,32 +54,9 @@
               <button class="btn btn-success" id = "findcustomer"><i class="fa fa-search" aria-hidden="true"></i>Find User</button>
             </div>
           </div>
-
-          <div class="modal-body">
-
-              <form class="form-horizontal">
-                <div class="form-group form-inline">
-                  <label class="col-xs-3 control-label">Find the </label>
-                  <div class="col-xs-9">
-                    <select class="form-control" id = "singleAggregator">
-                      <option>MAX</option>
-                      <option selected>MIN</option>
-                      <option>COUNT</option>
-                      <option>AVG</option>
-                      <option>SUM</option>
-                    </select>
-                    <span>Of</span>
-                    <select class="form-control" id = "singletobeAggregated">
-                      <option selected>amountDue</option>
-                      <option>pointsEarned</option>
-                    </select>
-                  </div>
-                </div>
-              </form>
         </div>
     </div>
   </div>
-  <div id="chart_div"></div>
   <div id="responsecontainer" align="center" color = "grey"></div>
 </div>
 </div>
@@ -118,12 +70,24 @@ $("#chart1").click(function() {
     url: "getData.php",
     dataType: "json",   //expect html to be returned
     success: function(response){
-      $("#responsecontainer").html(response);
-      var data = new google.visualization.DataTable(response);
-
-      // Instantiate and draw our chart, passing in some options.
-      var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
-      chart.draw(data, {width: 800, height: 400});
+      console.log(response);
+      for (var i in response){
+        response[i]['y'] = Number(response[i]['y']);
+      }
+      console.log(response);
+      var chart = new CanvasJS.Chart("responsecontainer", {
+    		title:{
+    			text: "Average Customer bills due"
+    		},
+    		data: [
+    		{
+    			// Change type to "doughnut", "line", "splineArea", etc.
+    			type: "column",
+    			dataPoints: response
+    		}
+    		]
+    	});
+    	chart.render();
     }
   });
 });
