@@ -33,6 +33,10 @@ create table customers(
   UNIQUE KEY (guestID, username),
   foreign key(username) references users(username)
 );
+
+ALTER TABLE customers
+   ADD FOREIGN KEY (username) references users(username);
+
 create table reservations(
   confirmationNo int(11) primary key,
   inDate date NOT NULL,
@@ -43,8 +47,10 @@ create table reservations(
   foreign key(roomNo) references rooms(roomNo),
   foreign key(inDate, outDate) references stays(inDate, outDate)
   ON DELETE CASCADE,
-  foreign key(creditCardNo) references customers(creditCardNo)
+  foreign key(creditCardNo) references customers(creditCardNo),
+  CHECK(roomNo<=10)
 );
+
 create table bills(
   confirmationNo int(11) primary key,
   pointsEarned int(11) NOT NULL,
@@ -127,7 +133,7 @@ insert into stays (inDate,outDate) values (20160405,20160407);
 -- now add in reservations
 -- customer 'A'-- stayed in all rooms and most frequent
 
-insert into reservations (confirmationNo,inDate,outDate,availability,roomNo,creditCardNo) values (1,20170101,20170105,true,1,1111);
+insert into reservations (confirmationNo,inDate,outDate,availability,roomNo,creditCardNo) values (1,20170701,20170705,true,1,1111);
 insert into reservations (confirmationNo,inDate,outDate,availability,roomNo,creditCardNo) values (2,20161201,20161208,true,2,1111);
 insert into reservations (confirmationNo,inDate,outDate,availability,roomNo,creditCardNo) values (3,20160301,20160310,true,3,1111);
 insert into reservations (confirmationNo,inDate,outDate,availability,roomNo,creditCardNo) values (4,20160811,20160815,true,4,1111);

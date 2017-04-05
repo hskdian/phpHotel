@@ -51,16 +51,16 @@
               <!-- <button class="btn btn-primary" id = "allreservations"><i class="fa fa-list"></i>All Reservations</button> -->
               <button class="btn btn-info" id = "deleteReservations"><i class="fa fa-compress" aria-hidden="true"></i>Delete Reservations</button>
               <button class="btn btn-primary" id = "deleteBill"><i class="fa fa-check"></i>Delete Bills</button>
-              <button class="btn btn-danger" id = "aggregate"><i class="fa fa-times"></i>Upgrade Room</button>
-              <button class="btn btn-success" id = "aggregateNested"><i class="fa fa-check"></i>Update Confirmation Number</button>
+              <button class="btn btn-danger" id = "showstays"><i class="fa fa-times"></i>Show Updated Stays (Cascade Delete)</button>
+              <button class="btn btn-success" id = "upgrade"><i class="fa fa-check"></i>Upgrade Room</button>
             </div>
           </div>
 
           <div class="modal-body">
 
             <form class="form-horizontal">
-              <div class="form-group form-inline">
-                <label class="col-xs-3 control-label">Delete Reservations </label>
+              <div class="form-group">
+                <label class="col-xs-3 control-label">Delete Reservations</label>
                 <div class="col-xs-9">
                   <input type="number" class="form-control" placeholder="1" id = "deleteReservationID">
                 </div>
@@ -69,38 +69,25 @@
 
             <form class="form-horizontal">
               <div class="form-group">
-                <label class="col-xs-3 control-label">Customers who</label>
+                <label class="col-xs-3 control-label">Delete Bills</label>
                 <div class="col-xs-9">
-                  <select class="form-control" id = "divideBy">
-                    <option selected>Booked All the rooms</option>
-                  </select>
+                  <input type="number" class="form-control" placeholder="1" id = "deletebillsID">
                 </div>
               </div>
             </form>
 
             <form class="form-horizontal">
               <div class="form-group form-inline">
-                <label class="col-xs-3 control-label">Update UserID </label>
+                <label class="col-xs-3 control-label">Upgrade Rooms</label>
                 <div class="col-xs-9">
-                  <span>From</span>
-                  <input type="number" class="form-control" placeholder="1111" id = "olduserID">
-                  <span>TO</span>
-                  <input type="number" class="form-control" placeholder="2222" id = "newuserID">
+                  <span>Confirmation Number</span>
+                  <input type="number" class="form-control" placeholder="1" id = "upgradeReservation">
+                  <span>New Room Number</span>
+                  <input type="number" class="form-control" placeholder="1" id = "upgradeRoom">
                 </div>
               </div>
             </form>
 
-            <form class="form-horizontal">
-              <div class="form-group form-inline">
-                <label class="col-xs-3 control-label">Update GuestID </label>
-                <div class="col-xs-9">
-                  <span>From</span>
-                  <input type="number" class="form-control" placeholder="1111" id = "oldguestID">
-                  <span>TO</span>
-                  <input type="number" class="form-control" placeholder="2222" id = "newguestID">
-                </div>
-              </div>
-            </form>
 
           </div>
         </div>
@@ -127,14 +114,14 @@
       });
     });
 
-    $("#division").click(function() {
+    $("#deleteBill").click(function() {
       var queryData = new Object();
-      queryData.divide = $("#divideBy").val();
+      queryData.reservationID = $("#deletebillsID").val();
       console.log(queryData);
       $.ajax({    //create an ajax request to load_page.php
         type: "POST",
         data: queryData,
-        url: "division.php",
+        url: "deletebills.php",
         dataType: "html",   //expect html to be returned
         success: function(response){
           $("#responsecontainer").html(response);
@@ -142,20 +129,31 @@
       });
     });
 
-    $("#aggregate").click(function() {
-      var queryData = new Object();
-      queryData.aggregator = $("#singleAggregator").val();
-      queryData.singletobeAggregated = $("#singletobeAggregated").val();
-      console.log(queryData);
+    $("#showstays").click(function() {
       $.ajax({    //create an ajax request to load_page.php
-        type: "POST",
-        data: queryData,
-        url: "aggregate.php",
+        type: "GET",
+        url: "allstays.php",
         dataType: "html",   //expect html to be returned
         success: function(response){
           $("#responsecontainer").html(response);
         }
       });
+    });
+
+    $("#upgrade").click(function() {
+        var queryData = new Object();
+        queryData.upgradeReservation = $("#upgradeReservation").val();
+        queryData.upgradeRoom = $("#upgradeRoom").val();
+        console.log(queryData);
+        $.ajax({    //create an ajax request to load_page.php
+          type: "POST",
+          data: queryData,
+          url: "upgrade.php",
+          dataType: "html",   //expect html to be returned
+          success: function(response){
+            $("#responsecontainer").html(response);
+          }
+        });
     });
 
     $("#aggregateNested").click(function() {
